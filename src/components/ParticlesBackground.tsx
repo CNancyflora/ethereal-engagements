@@ -1,17 +1,25 @@
-import { useCallback } from "react";
+import { useEffect, useState } from "react";
 import Particles from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
-import type { Engine } from "@tsparticles/engine";
+import type { Container, Engine } from "@tsparticles/engine";
 
 const ParticlesBackground = () => {
-  const particlesInit = useCallback(async (engine: Engine) => {
-    await loadSlim(engine);
+  const [init, setInit] = useState(false);
+
+  useEffect(() => {
+    const initParticles = async () => {
+      const { tsParticles } = await import("@tsparticles/engine");
+      await loadSlim(tsParticles as unknown as Engine);
+      setInit(true);
+    };
+    initParticles();
   }, []);
+
+  if (!init) return null;
 
   return (
     <Particles
       id="tsparticles"
-      init={particlesInit}
       className="fixed inset-0 -z-10"
       options={{
         fullScreen: false,
