@@ -24,7 +24,7 @@ const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         <Link to="/" className="font-display text-xl font-bold gradient-text">
-          Portfolio
+          Nancy Flora
         </Link>
 
         {/* Desktop */}

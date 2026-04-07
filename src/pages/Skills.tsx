@@ -5,28 +5,35 @@ const skillCategories = [
   {
     title: "Programming",
     skills: [
-      { name: "TypeScript", level: 95 },
-      { name: "JavaScript", level: 98 },
-      { name: "Python", level: 80 },
-      { name: "Rust", level: 45 },
+      { name: "Python", level: 90 },
+      { name: "Java", level: 85 },
+      { name: "C++", level: 75 },
     ],
   },
   {
-    title: "Frameworks",
+    title: "AI & Data Science",
     skills: [
-      { name: "React", level: 95 },
-      { name: "Next.js", level: 88 },
-      { name: "Node.js", level: 85 },
-      { name: "Three.js", level: 70 },
+      { name: "Machine Learning", level: 88 },
+      { name: "Deep Learning", level: 75 },
+      { name: "Data Analysis", level: 85 },
+      { name: "Data Visualisation", level: 82 },
     ],
   },
   {
-    title: "Tools",
+    title: "Libraries & Frameworks",
     skills: [
-      { name: "Git", level: 92 },
-      { name: "Docker", level: 75 },
-      { name: "Figma", level: 80 },
-      { name: "AWS", level: 65 },
+      { name: "TensorFlow", level: 78 },
+      { name: "Scikit-learn", level: 85 },
+      { name: "NumPy / Pandas", level: 90 },
+    ],
+  },
+  {
+    title: "Tools & Concepts",
+    skills: [
+      { name: "Git", level: 80 },
+      { name: "VS Code", level: 90 },
+      { name: "DSA", level: 82 },
+      { name: "DBMS / SQL", level: 85 },
     ],
   },
 ];
@@ -69,7 +76,7 @@ const Skills = () => (
         <span className="gradient-text">Skills</span>
       </motion.h1>
 
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
         {skillCategories.map((cat, ci) => (
           <motion.div
             key={cat.title}

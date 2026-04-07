@@ -1,10 +1,10 @@
 import { motion } from "framer-motion";
-import { Github, Linkedin, Twitter } from "lucide-react";
+import { Github, Linkedin, Globe } from "lucide-react";
 
 const socials = [
-  { icon: Github, href: "https://github.com", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com", label: "LinkedIn" },
-  { icon: Twitter, href: "https://twitter.com", label: "Twitter" },
+  { icon: Github, href: "https://github.com/CNancyflora", label: "GitHub" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/nancy-flora-69a69330a", label: "LinkedIn" },
+  { icon: Globe, href: "https://nancy-portfolio.web.app", label: "Portfolio" },
 ];
 
 const SocialLinks = ({ className = "" }: { className?: string }) => (

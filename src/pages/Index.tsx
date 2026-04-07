@@ -10,7 +10,6 @@ const Hero = () => (
   <PageTransition className="relative min-h-screen flex items-center justify-center overflow-hidden">
     <HeroScene />
 
-    {/* Gradient overlay */}
     <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-background pointer-events-none" />
 
     <div className="relative z-10 text-center px-6 max-w-4xl">
@@ -29,9 +28,9 @@ const Hero = () => (
         transition={{ delay: 0.4, duration: 0.8 }}
         className="text-5xl md:text-7xl lg:text-8xl font-display font-bold mb-6 leading-tight"
       >
-        <span className="gradient-text">Creative</span>
+        <span className="gradient-text">C Nancy</span>
         <br />
-        Developer
+        Flora
       </motion.h1>
 
       <motion.p
@@ -40,8 +39,8 @@ const Hero = () => (
         transition={{ delay: 0.6, duration: 0.6 }}
         className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed"
       >
-        Crafting immersive digital experiences through clean code, 
-        stunning visuals, and thoughtful interaction design.
+        AI &amp; Data Science student crafting intelligent solutions through
+        machine learning, full-stack development, and data-driven innovation.
       </motion.p>
 
       <motion.div
