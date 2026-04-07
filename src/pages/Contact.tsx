@@ -37,14 +37,15 @@ const Contact = () => {
         >
           <span className="gradient-text">Contact</span>
         </motion.h1>
-        <motion.p
+        <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.5 }}
-          className="text-muted-foreground mb-12 leading-relaxed"
+          className="text-muted-foreground mb-12 leading-relaxed space-y-2"
         >
-          Have a project in mind or just want to say hello? Drop me a message below.
-        </motion.p>
+          <p>Have a project in mind or just want to say hello? Drop me a message below.</p>
+          <p className="text-sm">📧 nancyflora804@gmail.com · 📍 Chittoor, Andhra Pradesh</p>
+        </motion.div>
 
         <motion.form
           onSubmit={handleSubmit}

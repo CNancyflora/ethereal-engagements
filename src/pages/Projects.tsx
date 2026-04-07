@@ -4,40 +4,22 @@ import PageTransition from "@/components/PageTransition";
 
 const projects = [
   {
-    title: "E-Commerce Platform",
-    description: "A full-featured online store with real-time inventory, payment processing, and admin dashboard.",
-    tech: ["React", "Node.js", "Stripe", "PostgreSQL"],
+    title: "Smart Healthcare Assistant",
+    description: "ML-powered predictive analysis tool with EDA, heatmaps, scatter plots, and model optimization for healthcare datasets.",
+    tech: ["Python", "Scikit-learn", "Pandas", "Machine Learning"],
     color: "#c8a96e",
   },
   {
-    title: "AI Dashboard",
-    description: "Analytics dashboard powered by machine learning, featuring real-time data visualization.",
-    tech: ["Next.js", "Python", "TensorFlow", "D3.js"],
+    title: "Smart UV Protection Wearable",
+    description: "Wearable system using SVM (92% accuracy) and CNN (88% accuracy) for UV exposure prediction with IoT sensors.",
+    tech: ["Python", "SVM", "CNN", "IoT Sensors"],
     color: "#a08050",
   },
   {
-    title: "Social Media App",
-    description: "A modern social platform with real-time messaging, stories, and content sharing.",
-    tech: ["React Native", "Firebase", "GraphQL"],
+    title: "Full Stack Website",
+    description: "Responsive and dynamic website with intuitive UI, server-side logic, and database integration built during internship.",
+    tech: ["React", "Node.js", "Database", "REST API"],
     color: "#e8dcc8",
-  },
-  {
-    title: "3D Portfolio",
-    description: "An immersive portfolio experience built with Three.js and WebGL shaders.",
-    tech: ["Three.js", "GLSL", "React", "Framer Motion"],
-    color: "#8a7040",
-  },
-  {
-    title: "Task Management",
-    description: "Collaborative project management tool with drag-and-drop, timelines, and team features.",
-    tech: ["Vue.js", "Supabase", "Tailwind"],
-    color: "#d4c4a0",
-  },
-  {
-    title: "Music Streaming",
-    description: "A sleek music player with playlist management, audio visualization, and social features.",
-    tech: ["React", "Web Audio API", "Node.js"],
-    color: "#b09060",
   },
 ];
 
@@ -71,7 +53,6 @@ const Projects = () => (
             whileHover={{ y: -8, scale: 1.02 }}
             className="glass-card p-6 group cursor-pointer hover:border-accent/30 transition-all duration-300"
           >
-            {/* Color accent bar */}
             <div
               className="w-full h-1 rounded-full mb-5 opacity-60 group-hover:opacity-100 transition-opacity"
               style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }}
@@ -90,7 +71,7 @@ const Projects = () => (
               ))}
             </div>
             <div className="flex gap-3">
-              <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
+              <a href="https://github.com/CNancyflora" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors">
                 <Github size={18} />
               </a>
               <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">

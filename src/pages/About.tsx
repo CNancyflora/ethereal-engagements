@@ -2,10 +2,16 @@ import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 
 const timeline = [
-  { year: "2024", title: "Senior Developer", description: "Leading frontend architecture at a tech startup, building scalable applications." },
-  { year: "2023", title: "Full Stack Developer", description: "Developed end-to-end solutions using React, Node.js, and cloud services." },
-  { year: "2022", title: "Frontend Developer", description: "Created responsive, accessible web apps with modern frameworks." },
-  { year: "2021", title: "CS Degree", description: "Graduated with honors in Computer Science, focusing on software engineering." },
+  { year: "2025", title: "AI Developer Intern – LinesOfTech", description: "Developed a Smart Healthcare Assistant using ML for predictive analysis. Built and trained models, performed EDA, and created advanced data visualisations." },
+  { year: "2025", title: "Full Stack Developer Intern – Ones Infotech", description: "Developed responsive websites using full-stack technologies. Designed intuitive UIs and implemented backend functionalities with database integration." },
+  { year: "2024", title: "Oracle Certifications", description: "Earned Oracle Certified Professional: Java SE 11 Developer and Oracle Database SQL Certified Specialist." },
+  { year: "2023", title: "B.Tech – AI & Data Science", description: "Started B.Tech in AI & Data Science at SIMATS University (Saveetha Institute). Current CGPA: 8.5/10. Expected graduation: 2027." },
+];
+
+const certifications = [
+  "Oracle Certified Professional: Java SE 11 Developer",
+  "Oracle Database SQL Certified Specialist",
+  "NPTEL – Introduction to Internet of Things",
 ];
 
 const About = () => (
@@ -34,17 +40,18 @@ const About = () => (
         transition={{ delay: 0.5 }}
         className="text-lg text-muted-foreground max-w-3xl mb-16 leading-relaxed"
       >
-        I'm a passionate developer with a love for creating beautiful, 
-        performant web experiences. With expertise spanning frontend development, 
-        3D graphics, and UI/UX design, I bring ideas to life through code.
+        I'm C Nancy Flora — a results-driven B.Tech student specializing in Artificial Intelligence
+        and Data Science, with strong skills in programming, data structures, and machine learning.
+        Oracle-certified in Java and SQL, with hands-on experience in AI projects and full-stack development.
+        A proactive learner seeking to contribute to innovative and growth-oriented organizations.
       </motion.p>
 
       {/* Timeline */}
-      <div className="relative">
+      <div className="relative mb-16">
         <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-border" />
         {timeline.map((item, i) => (
           <motion.div
-            key={item.year}
+            key={item.title}
             initial={{ opacity: 0, x: i % 2 === 0 ? -50 : 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.6 + i * 0.15, duration: 0.5 }}
@@ -64,6 +71,28 @@ const About = () => (
           </motion.div>
         ))}
       </div>
+
+      {/* Certifications */}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.2 }}
+      >
+        <h2 className="text-2xl font-display font-bold mb-6 gradient-text">Certifications</h2>
+        <div className="grid md:grid-cols-3 gap-4">
+          {certifications.map((cert, i) => (
+            <motion.div
+              key={cert}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3 + i * 0.1 }}
+              className="glass-card p-5 hover:border-accent/30 transition-colors"
+            >
+              <p className="text-sm text-foreground font-medium">{cert}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   </PageTransition>
 );
