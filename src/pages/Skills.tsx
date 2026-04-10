@@ -1,56 +1,58 @@
 import { motion } from "framer-motion";
 import PageTransition from "@/components/PageTransition";
 
-const skillCategories = [
+type Skill = { name: string; iconUrl: string };
+
+const skillCategories: Array<{ title: string; skills: Skill[] }> = [
   {
     title: "Programming",
     skills: [
-      { name: "Python", level: 90 },
-      { name: "Java", level: 85 },
-      { name: "C++", level: 75 },
+      { name: "Python", iconUrl: "https://cdn.simpleicons.org/python" },
+      { name: "Java", iconUrl: "https://cdn.simpleicons.org/java" },
+      { name: "C++", iconUrl: "https://cdn.simpleicons.org/cplusplus" },
     ],
   },
   {
     title: "AI & Data Science",
     skills: [
-      { name: "Machine Learning", level: 88 },
-      { name: "Deep Learning", level: 75 },
-      { name: "Data Analysis", level: 85 },
-      { name: "Data Visualisation", level: 82 },
+      { name: "Machine Learning", iconUrl: "https://cdn.simpleicons.org/scikitlearn" },
+      { name: "Deep Learning", iconUrl: "https://cdn.simpleicons.org/pytorch" },
+      { name: "Data Analysis", iconUrl: "https://cdn.simpleicons.org/pandas" },
+      { name: "Data Visualisation", iconUrl: "https://cdn.simpleicons.org/plotly" },
     ],
   },
   {
     title: "Libraries & Frameworks",
     skills: [
-      { name: "TensorFlow", level: 78 },
-      { name: "Scikit-learn", level: 85 },
-      { name: "NumPy / Pandas", level: 90 },
+      { name: "TensorFlow", iconUrl: "https://cdn.simpleicons.org/tensorflow" },
+      { name: "Scikit-learn", iconUrl: "https://cdn.simpleicons.org/scikitlearn" },
+      { name: "NumPy", iconUrl: "https://cdn.simpleicons.org/numpy" },
+      { name: "Pandas", iconUrl: "https://cdn.simpleicons.org/pandas" },
     ],
   },
   {
     title: "Tools & Concepts",
     skills: [
-      { name: "Git", level: 80 },
-      { name: "VS Code", level: 90 },
-      { name: "DSA", level: 82 },
-      { name: "DBMS / SQL", level: 85 },
+      { name: "Git", iconUrl: "https://cdn.simpleicons.org/git" },
+      { name: "VS Code", iconUrl: "https://cdn.simpleicons.org/visualstudiocode" },
+      { name: "DSA", iconUrl: "https://cdn.simpleicons.org/leetcode" },
+      { name: "DBMS / SQL", iconUrl: "https://cdn.simpleicons.org/mysql" },
     ],
   },
 ];
 
-const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: number }) => (
-  <div className="mb-5">
-    <div className="mb-2 text-sm font-body text-foreground">{name}</div>
-    <div className="h-2 rounded-full bg-secondary overflow-hidden">
-      <motion.div
-        initial={{ width: 0 }}
-        animate={{ width: `${level}%` }}
-        transition={{ delay, duration: 1, ease: "easeOut" }}
-        className="h-full rounded-full"
-        style={{ background: "var(--gradient-beige)" }}
-      />
+const SkillCard = ({ skill, delay }: { skill: Skill; delay: number }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 16 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay, duration: 0.4 }}
+    className="flex items-center gap-3 rounded-xl border border-border/50 bg-secondary/20 px-4 py-3 hover:border-accent/30 hover:bg-secondary/30 transition-colors"
+  >
+    <div className="h-10 w-10 rounded-lg bg-background/60 border border-border/50 flex items-center justify-center overflow-hidden">
+      <img src={skill.iconUrl} alt={`${skill.name} logo`} className="h-6 w-6" loading="lazy" />
     </div>
-  </div>
+    <div className="text-sm font-body text-foreground">{skill.name}</div>
+  </motion.div>
 );
 
 const Skills = () => (
@@ -83,14 +85,11 @@ const Skills = () => (
             className="glass-card p-6"
           >
             <h2 className="font-display text-xl font-bold mb-6 text-accent">{cat.title}</h2>
-            {cat.skills.map((skill, si) => (
-              <SkillBar
-                key={skill.name}
-                name={skill.name}
-                level={skill.level}
-                delay={0.6 + ci * 0.15 + si * 0.1}
-              />
-            ))}
+            <div className="grid sm:grid-cols-2 gap-3">
+              {cat.skills.map((skill, si) => (
+                <SkillCard key={skill.name} skill={skill} delay={0.6 + ci * 0.15 + si * 0.08} />
+              ))}
+            </div>
           </motion.div>
         ))}
       </div>

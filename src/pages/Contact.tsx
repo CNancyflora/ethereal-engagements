@@ -9,11 +9,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
-const EMAILJS_SERVICE_ID = "service_p1opy4c";
-const EMAILJS_TEMPLATE_ID = "template_ep5b015";
-const EMAILJS_PUBLIC_KEY = "ROavEXGBPl2sHyvyQ";
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "service_p1opy4c";
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_ep5b015";
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "ROavEXGBPl2sHyvyQ";
 
-emailjs.init(EMAILJS_PUBLIC_KEY);
+emailjs.init(EMAILJS_PUBLIC_KEY, import.meta.env.BASE_URL);
 
 const Contact = () => {
   const { toast } = useToast();
@@ -24,6 +24,9 @@ const Contact = () => {
     e.preventDefault();
     setSending(true);
     try {
+      if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
+        throw new Error("Email service is not configured.");
+      }
       await emailjs.send(
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
@@ -48,7 +51,11 @@ const Contact = () => {
               : "";
       toast({
         title: "Could not send",
-        description: details ? `Please try again. (${details})` : "Please try again or email me directly.",
+        description: details
+          ? details.includes("service ID")
+            ? "EmailJS service ID not found. Open EmailJS dashboard and copy the correct Service ID."
+            : `Please try again. (${details})`
+          : "Please try again or email me directly.",
         variant: "destructive",
       });
     } finally {
