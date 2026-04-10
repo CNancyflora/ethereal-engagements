@@ -17,11 +17,14 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # @playwright/test installs `playwright`, which downloads browsers by default — that often breaks CI.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: npm
       - name: Set base path for GitHub Pages
         run: |
@@ -32,11 +35,15 @@ jobs:
           else
             echo "VITE_BASE_PATH=/$REPO/" >> "$GITHUB_ENV"
           fi
-      - run: npm ci
-      - run: npm run build
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+      - name: Build site
+        run: npm run build
+        env:
+          CI: true
       - name: SPA fallback (refresh deep links on GitHub Pages)
         run: cp dist/index.html dist/404.html
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v4
         with:
           path: dist
 
