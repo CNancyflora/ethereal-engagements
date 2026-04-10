@@ -53,7 +53,11 @@ const Hero = () => (
           <Link to="/projects">View Projects</Link>
         </Button>
         <Button asChild variant="outline" size="lg" className="border-accent/30 text-foreground hover:bg-accent/10 font-body">
-          <a href="#" download>
+          <a
+            href="https://drive.google.com/file/d/10TA8iBnzq5n5H_1pd465VkhtN_PH0yr7/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <Download size={18} className="mr-2" /> Download Resume
           </a>
         </Button>

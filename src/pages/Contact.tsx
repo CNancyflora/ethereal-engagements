@@ -8,14 +8,53 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 
+const EMAILJS_SERVICE_ID = "service_p1opy4c";
+const EMAILJS_TEMPLATE_ID = "template_ep5b015";
+const EMAILJS_PUBLIC_KEY = "ROavEXGBPl2sHyvyQ";
+
+async function sendViaEmailJS(params: Record<string, string>) {
+  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      service_id: EMAILJS_SERVICE_ID,
+      template_id: EMAILJS_TEMPLATE_ID,
+      user_id: EMAILJS_PUBLIC_KEY,
+      template_params: params,
+    }),
+  });
+  if (!res.ok) {
+    const text = await res.text();
+    throw new Error(text || res.statusText);
+  }
+}
+
 const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [sending, setSending] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
-    setForm({ name: "", email: "", message: "" });
+    setSending(true);
+    try {
+      await sendViaEmailJS({
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+        reply_to: form.email,
+      });
+      toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      toast({
+        title: "Could not send",
+        description: "Please try again or email me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -88,8 +127,13 @@ const Contact = () => {
               className="bg-secondary/50 border-border focus:border-accent"
             />
           </div>
-          <Button type="submit" size="lg" className="bg-accent text-accent-foreground hover:bg-accent/80 w-full font-body">
-            <Send size={18} className="mr-2" /> Send Message
+          <Button
+            type="submit"
+            size="lg"
+            disabled={sending}
+            className="bg-accent text-accent-foreground hover:bg-accent/80 w-full font-body"
+          >
+            <Send size={18} className="mr-2" /> {sending ? "Sending…" : "Send Message"}
           </Button>
         </motion.form>
 
