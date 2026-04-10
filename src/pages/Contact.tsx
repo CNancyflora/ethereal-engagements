@@ -16,6 +16,12 @@ const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "ROavEXGBP
 // NOTE: 2nd arg to init is the EmailJS API origin. Do not pass BASE_URL.
 emailjs.init(EMAILJS_PUBLIC_KEY);
 
+function openMailFallback(name: string, fromEmail: string, message: string) {
+  const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+  const body = encodeURIComponent(`Name: ${name}\nEmail: ${fromEmail}\n\nMessage:\n${message}`);
+  window.location.href = `mailto:nancyflora804@gmail.com?subject=${subject}&body=${body}`;
+}
+
 const Contact = () => {
   const { toast } = useToast();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
@@ -54,11 +60,12 @@ const Contact = () => {
         title: "Could not send",
         description: details
           ? details.includes("service ID")
-            ? "EmailJS service ID not found. Open EmailJS dashboard and copy the correct Service ID."
+            ? "EmailJS service ID not found. Opening your email app as fallback."
             : `Please try again. (${details})`
           : "Please try again or email me directly.",
         variant: "destructive",
       });
+      openMailFallback(form.name, form.email, form.message);
     } finally {
       setSending(false);
     }
