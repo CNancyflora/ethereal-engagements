@@ -13,7 +13,8 @@ const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID ?? "service_p
 const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID ?? "template_ep5b015";
 const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY ?? "ROavEXGBPl2sHyvyQ";
 
-emailjs.init(EMAILJS_PUBLIC_KEY, import.meta.env.BASE_URL);
+// NOTE: 2nd arg to init is the EmailJS API origin. Do not pass BASE_URL.
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const Contact = () => {
   const { toast } = useToast();
