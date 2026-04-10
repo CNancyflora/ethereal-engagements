@@ -40,10 +40,7 @@ const skillCategories = [
 
 const SkillBar = ({ name, level, delay }: { name: string; level: number; delay: number }) => (
   <div className="mb-5">
-    <div className="flex justify-between mb-2">
-      <span className="text-sm font-body text-foreground">{name}</span>
-      <span className="text-sm text-muted-foreground">{level}%</span>
-    </div>
+    <div className="mb-2 text-sm font-body text-foreground">{name}</div>
     <div className="h-2 rounded-full bg-secondary overflow-hidden">
       <motion.div
         initial={{ width: 0 }}

@@ -1,3 +1,4 @@
+import emailjs from "@emailjs/browser";
 import { motion } from "framer-motion";
 import { Send } from "lucide-react";
 import { useState } from "react";
@@ -12,22 +13,7 @@ const EMAILJS_SERVICE_ID = "service_p1opy4c";
 const EMAILJS_TEMPLATE_ID = "template_ep5b015";
 const EMAILJS_PUBLIC_KEY = "ROavEXGBPl2sHyvyQ";
 
-async function sendViaEmailJS(params: Record<string, string>) {
-  const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      service_id: EMAILJS_SERVICE_ID,
-      template_id: EMAILJS_TEMPLATE_ID,
-      user_id: EMAILJS_PUBLIC_KEY,
-      template_params: params,
-    }),
-  });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(text || res.statusText);
-  }
-}
+emailjs.init(EMAILJS_PUBLIC_KEY);
 
 const Contact = () => {
   const { toast } = useToast();
@@ -38,18 +24,31 @@ const Contact = () => {
     e.preventDefault();
     setSending(true);
     try {
-      await sendViaEmailJS({
-        from_name: form.name,
-        from_email: form.email,
-        message: form.message,
-        reply_to: form.email,
-      });
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+          reply_to: form.email,
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
       toast({ title: "Message sent!", description: "Thanks for reaching out. I'll get back to you soon." });
       setForm({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err: unknown) {
+      const details =
+        err instanceof Error
+          ? err.message
+          : typeof err === "string"
+            ? err
+            : err
+              ? JSON.stringify(err)
+              : "";
       toast({
         title: "Could not send",
-        description: "Please try again or email me directly.",
+        description: details ? `Please try again. (${details})` : "Please try again or email me directly.",
         variant: "destructive",
       });
     } finally {
